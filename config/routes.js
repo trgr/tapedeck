@@ -33,6 +33,7 @@ module.exports.routes = {
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
     '/play/:id' : 'PlayerController.play',
+    '/new' : 'PlayerController.newPlaylist',
     
     
     '/': {

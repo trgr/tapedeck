@@ -14,6 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var sanitize = require('google-caja').sanitize
 
 module.exports = {
     
@@ -25,18 +26,18 @@ module.exports = {
 	var id = req.params.id
 	res.view("player/index",{playlistid:id})
     },
+    getPlaylists : function(req,res){
+	Playlist.find({}).done(function(err,playlists){
+	    console.log(playlists)
+	    res.json({playlists:playlists})
+	});
+    },
     
     getPlaylist : function(req,res){
 	var id = req.params.id
 	Playlist.findOne(id).done(function(err,playlist){
-	    var len = Object.keys(playlist.items);
-	    list = []
-	    for (var i=0; len>=i; i++){
-		
-		list.push(playlist.items[i].id)
-	    }
-	    console.log(list)
-	    res.json({playlist:list})
+	    
+	    res.json({playlist:playlist})
 	});
     },
     newPlaylist : function(req,res){
@@ -46,16 +47,24 @@ module.exports = {
     savePlaylist : function(req,res){
 	var data = req.body
 	var len = Object.keys(data.link).length
-	var name = req.body.name
+	var name = sanitize(req.body.name)
 	var items = []
 
 	for(var i = 0; len>i; i++){
 	    if(data.link[i] == "")
 		continue
 	    var item = {}
-	    item.id = data.link[i]
-	    item.band = data.artist[i]
-	    item.title = data.title[i]
+	    var id = sanitize(data.link[i])
+	    var link = ""
+	    if(id.search("youtube") != -1){
+		var s = id.split("=")
+		link = s[1]
+	    }else{
+		link = id
+	    }
+	    item.id = link
+	    item.artist = sanitize(data.artist[i])
+	    item.title = sanitize(data.title[i])
 	    items.push(item)
 	}
 
@@ -63,7 +72,7 @@ module.exports = {
 	    name : name,
 	    items : items
 	}).done(function(err,playlist){
-	    res.view({id:id})
+	    res.view("player/index",{playlistid:playlist.id})
 	});
 
     },

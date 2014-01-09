@@ -1,4 +1,22 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 <input type="hidden" id="playlistid" value="<%=playlistid%>"/>
 <div id="player"></div>
-<img src="/images/cassette.jpg"/>
+<div class="row">
+  <div class="col-md-4 col-md-offset-2">
+    <h2 id="title"></h2>
+    <div id="loading">Loading ...</div>
+    <img src="/images/cassette.jpg"/><br/>
+    <input type="button" id="last" value="<<Rew"/>
+    <input type="button" id="next" value="Fwd>>"/>
+    <br/>
+    <div id="info"></div><br>
+    Playlist link: <input type="text" value="http://url/play/<%=playlistid%>">
+  </div>
+  <div class="col-md-2 col-md-offset-0">
+    <h2>Other playlists</h2>
+    <div id="playlists"></div>
+    <h3>Or you can</h3>
+    <a href="/new">Create a new Playlist</a>
+  </div>
+</div>
+
