@@ -1,0 +1,16 @@
+.cassette_stopped{
+    display:block;
+}
+
+.cassette_animated{
+    display:none;
+}
+
+#playlistinfo ol{
+    padding-left:20px;
+    margin-left:0px;
+}
+
+.maincontent{
+    margin-top:80px;
+}

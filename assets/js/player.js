@@ -40,30 +40,33 @@ $(function(){
     });
 
     $("#last").click(function(){
-
 	current--;
 	if(0 <= current){
 	    player.loadVideoById(playlist[current],0,"large");
 	}
     });
+
+    $("#play").click(function(){
+	$(".cassette_stopped").css('display','none');
+	$(".cassette_animated").css('display','block');
+	load(playlist[current]);
+    });
     
     $.getJSON("/player/getPlaylist/"+id,function(data){
 	var len = Object.keys(data.playlist.items).length;
 	$("#title").html(data.playlist.name);
+	var ol = document.createElement("ol");
 	for(var i = 0; len>i; i++){
 	    playlist.push(data.playlist.items[i].id);
- 	    var row = document.createElement("div");
-	    var cell = document.createElement("div");
-	    $(row).addClass("row");
-	    $(cell).addClass("col-md-12");
-	    $(cell).html(data.playlist.items[i].artist + " - " + data.playlist.items[i].title);
-	    $(row).append(cell);
-	    $("#info").append(row);
+	    var li = document.createElement("li");
+	    $(li).html(data.playlist.items[i].artist + " - " + data.playlist.items[i].title);
+	    $(ol).append(li);
+	    
 	}
+	$("#playlistinfo").append(ol);
 	current = 0;
-	console.log(playlist);
 	$("#loading").html("");
-	load(playlist[current]);
+	
     });
     $.getJSON("/player/getPlaylists",function(data){
 	var len = Object.keys(data.playlists).length;
