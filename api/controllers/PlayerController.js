@@ -15,6 +15,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 var sanitize = require('google-caja').sanitize
+var videoinfo = require('youtube-video-info')
 
 module.exports = {
     
@@ -24,8 +25,11 @@ module.exports = {
     
     play : function(req,res){
 	var id = req.params.id
+	if(typeof(id) == "undefined")
+	    id="52cf08c437cc188c41882f21"
 	res.view("player/index",{playlistid:id})
     },
+    
     getPlaylists : function(req,res){
 	Playlist.find({}).done(function(err,playlists){
 	    console.log(playlists)
