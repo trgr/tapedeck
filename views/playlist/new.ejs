@@ -1,0 +1,25 @@
+<div class="maincontent">
+  <div class="row">
+    <form method="post" action="/playlist/create">
+      <div class="col-md-6 col-md-offset-3">
+	<div class="row">
+	  <div class="col-md-6 col-md-offset-1">
+	    <input name="name" type="text" class="form-control" value="My Playlist">
+	  </div>	
+	</div>
+	<% for(var i = 0; 8>=i; i++) { %>
+	<div class="row">
+	  <div class="col-md-1">#<%=i+1%></div>
+	  <div class="col-md-3">
+	    <input name="link[<%=i%>]" meta:index="<%=i%>" type="text" class="form-control linkdata" placeholder="Youtube link">
+	  </div>
+	  <div class="col-md-6">
+	    <input name="info[<%=i%>]" id="info[<%=i%>]" type="text" class="form-control" placeholder="Song title">
+	  </div>
+	</div>    
+	<% }%>
+	<input type="submit" value="Save Playlist">
+      </div>
+    </form>
+  </div>
+</div>

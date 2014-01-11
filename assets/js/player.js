@@ -52,14 +52,14 @@ $(function(){
 	load(playlist[current]);
     });
     
-    $.getJSON("/player/getPlaylist/"+id,function(data){
-	var len = Object.keys(data.playlist.items).length;
-	$("#title").html(data.playlist.name);
+    $.getJSON("/playlist/find/"+id,function(data){
+	var len = Object.keys(data.items).length;
+	$("#title").html(data.name);
 	var ol = document.createElement("ol");
 	for(var i = 0; len>i; i++){
-	    playlist.push(data.playlist.items[i].id);
+	    playlist.push(data.items[i].id);
 	    var li = document.createElement("li");
-	    $(li).html(data.playlist.items[i].artist + " - " + data.playlist.items[i].title);
+	    $(li).html(data.items[i].info);
 	    $(ol).append(li);
 	    
 	}
@@ -68,10 +68,10 @@ $(function(){
 	$("#loading").html("");
 	
     });
-    $.getJSON("/player/getPlaylists",function(data){
-	var len = Object.keys(data.playlists).length;
+    $.getJSON("/playlist",function(data){
+	var len = Object.keys(data).length;
 	for(var i=0; len>i; i++){
-	    var link = "<a href='/play/"+data.playlists[i].id+"'>"+data.playlists[i].name+"</a>";
+	    var link = "<a href='/play/"+data[i].id+"'>"+data[i].name+"</a>";
 	    var row = document.createElement("div");
 	    var cell = document.createElement("div");
 

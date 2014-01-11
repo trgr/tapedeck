@@ -1,5 +1,5 @@
 /**
- * PlayerController
+ * YoutubeinfoController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -14,21 +14,26 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-
+var httpsync = require("httpsync")
+var util = require("util")
 module.exports = {
     
-    index : function(req,res){
-	res.view()
-    },
     
-    play : function(req,res){
-	var id = req.params.id
-	if(typeof(id) == "undefined")
-	    id="52cf08c437cc188c41882f21"
-	res.view("player/index",{playlistid:id})
+    lookup : function(req,res){
+	var link = req.params.id
+	var url = "http://gdata.youtube.com/feeds/api/videos/"+link+"?v=2&alt=json"
+	var req = httpsync.get(url)
+	var hres = req.end()
+	var info = JSON.parse(hres.data.toString())
+	return res.json({title:info.entry.title.$t})
+
     },
-    
-    _config: {}
+
+  /**
+   * Overrides for the settings in `config/controllers.js`
+   * (specific to YoutubeinfoController)
+   */
+  _config: {}
 
   
 };
