@@ -25,7 +25,10 @@ module.exports = {
 	var id = req.params.id
 	if(typeof(id) == "undefined")
 	    id="52cf08c437cc188c41882f21"
-	res.view("player/index",{playlistid:id})
+	
+	Playlist.findOne(id).done(function(error,playlist){
+	    res.view("player/index",{playlist:playlist})
+	});
     },
     
     _config: {}

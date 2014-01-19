@@ -33,8 +33,9 @@ module.exports.routes = {
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
     '/play/:id' : 'PlayerController.play',
+    '/edit/:id' : 'PlaylistController.edit',
+    '/playlist' : 'PlaylistController.find',
     '/' : 'PlayerController.play',
-    
     
   /*
   // But what if you want your home page to display

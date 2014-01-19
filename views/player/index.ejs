@@ -1,6 +1,6 @@
 <div class="maincontent">
   <script src="https://www.youtube.com/iframe_api"></script>
-  <input type="hidden" id="playlistid" value="<%=playlistid%>"/>
+  <input type="hidden" id="playlistid" value="<%=playlist.id%>"/>
 
   <div class="row">
     <div class="col-md-4 col-md-offset-2">
@@ -19,8 +19,13 @@
 	  <span class="glyphicon glyphicon-fast-forward"></span>
 	</button>
 	<p>
-	  Share: <input type="text" value="http://tapedeck.radiofreeinternet.com/play/<%=playlistid%>">
+	  Share: <input type="text" value="http://tapedeck.radiofreeinternet.com/play/<%=playlist.id%>">
 	</p>
+	<% if(req.session.user == playlist.user_id && typeof(req.session.user) != "undefined" ) {%>
+	<p>
+	  <a href="/playlist/edit/<%=playlist.id%>">Edit playlist</a>
+	</p>
+	<% } %>
       </center>
     </div>
     <div class="col-md-4 col-md-offset-1">
@@ -31,7 +36,7 @@
       <h3>Check out other playlists</h3>
       <div id="playlists"></div>
       <h3>Or you can</h3>
-      <a href="/new">Create a new Playlist</a>
+      <a href="/playlist/new">Create a new Playlist</a>
     </div>
   </div>
 </div>

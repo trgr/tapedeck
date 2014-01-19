@@ -12,8 +12,15 @@
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="navbar-header">
-	<a class="navbar-brand" href="#">Tapedeck</a>
+	<a class="navbar-brand" href="/">Tapedeck</a>
       </div>
+      <ul class="nav navbar-nav">
+	<% if(typeof(req.session.username ) == "undefined"){ %>
+	<li><a href="/user/login/">login</a></li>
+	<% }else{ %>
+	<li><a href="#">Hello <%=req.session.username%></a></li>
+	<% }%>
+      </ul>
     </nav>
     
     <%- body %>

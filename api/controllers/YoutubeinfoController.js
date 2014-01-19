@@ -14,21 +14,20 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var httpsync = require("httpsync")
+var request = require("request")
 var util = require("util")
 module.exports = {
     
-    
     lookup : function(req,res){
-	var link = req.params.id
-	var url = "http://gdata.youtube.com/feeds/api/videos/"+link+"?v=2&alt=json"
-	var req = httpsync.get(url)
-	var hres = req.end()
-	var info = JSON.parse(hres.data.toString())
-	return res.json({title:info.entry.title.$t})
-
+        var link = req.params.id
+        var url = "http://gdata.youtube.com/feeds/api/videos/"+link+"?v=2&alt=j\
+son"
+        request(url,function(error,response,body){
+            var info = JSON.parse(body)
+            return res.json({title:info.entry.title.$t})
+        });
     },
-
+    
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to YoutubeinfoController)

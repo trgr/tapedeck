@@ -10,12 +10,9 @@ module.exports = {
 
   attributes: {
       name : 'string',
-      items : 'array'
-      
-  	/* e.g.
-  	nickname: 'string'
-  	*/
-    
+      items : 'array',
+      user_id : 'string',
+      plays : 'int',
   }
 
 };

@@ -14,6 +14,14 @@
       <div class="navbar-header">
 	<a class="navbar-brand" href="#">Tapedeck</a>
       </div>
+      <ul class="nav navbar-nav">
+	<% if(typeof(req.session.id ) == "undefined"){ %>
+	<li><a href="/user/login/">login</a></li>
+	<% }else{ %>
+	<li><a href="#">Hello <%=req.session.username%></a></li>
+	<% }%>
+      </ul>
+	    
     </nav>
     
     <%- body %>
