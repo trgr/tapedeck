@@ -32,7 +32,7 @@ module.exports = {
 	}).done(function(err,user){
 	    console.log(err)
 	    console.log(user)
-	    return res.view();
+	    return res.redirect("/")
 	});
     },
     login : function(req,res){
@@ -48,7 +48,7 @@ module.exports = {
 	    username : username,
 	    
 	}).done(function(err,user){
-
+	    
 	    if(err)   return res.json({ error : "DB error"},500)
 	    if(!user) return res.view();
 	    

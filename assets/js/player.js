@@ -2,6 +2,8 @@ $(function(){
     var playlist = [];
     var current;
     var player;
+    var playing = false;
+    var paused = false;
     function load(id){
 	console.log(id);
 	player = new YT.Player('player', {
@@ -47,9 +49,33 @@ $(function(){
     });
 
     $("#play").click(function(){
-	$(".cassette_stopped").css('display','none');
-	$(".cassette_animated").css('display','block');
-	load(playlist[current]);
+	if(playing == false && paused == false){
+	    playing = true;
+	    console.log("play");
+	    $(".cassette_stopped").css('display','none');
+	    $(".cassette_animated").css('display','block');
+	    load(playlist[current]);
+	    return;
+	}
+	
+	if(playing == true && paused == false){
+	    playing = false;
+	    paused = true;
+	    console.log("Pause");
+	    $(".cassette_stopped").css('display','block');
+	    $(".cassette_animated").css('display','none');
+	    player.pauseVideo();
+	    return;
+	}
+	
+	if(playing == false && paused == true){
+	    playing = true;
+	    paused = false
+	    $(".cassette_stopped").css('display','none');
+	    $(".cassette_animated").css('display','block');
+	    player.playVideo();
+	    return;
+	}
     });
     
     $.getJSON("/playlist/find/"+id,function(data){

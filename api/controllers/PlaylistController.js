@@ -96,7 +96,31 @@ module.exports = {
 	    
 	});
     },
+    
+    delete : function(req,res){
+	var id = req.params.id
+	if(typeof(id) == "undefined")
+	    return res.json({error:"Undefined id"},500)
+	if(typeof(req.session.id) == "undefined")
+	    return res.json({error:"DENIED!"})
+	
+	Playlist.findOne({
+	    _id : id,
+	    user_id : req.session.user
+	}).done(function(error,playlist){
+	    console.log(playlist)
+	    console.log("user:" + req.session.user)
+	    if(error)
+		return res.json({error:"DB error"},500)
+	    playlist.destroy(function(err){
+		if(error)
+		    return res.json({error:"DB error"},500)
+		return res.json({message:"OK"},200)
+	    })
+	})
+	
 
+    },
     edit : function(req,res){
 	var id = req.params.id
 	if(typeof(id) == "undefined")

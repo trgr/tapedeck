@@ -23,7 +23,7 @@
 	</p>
 	<% if(req.session.user == playlist.user_id && typeof(req.session.user) != "undefined" ) {%>
 	<p>
-	  <a href="/playlist/edit/<%=playlist.id%>">Edit playlist</a>
+	  <a href="/playlist/edit/<%=playlist.id%>">Edit playlist</a> <a href="/playlist/delete/<%=playlist.id%>">Delete playlist</a>
 	</p>
 	<% } %>
       </center>

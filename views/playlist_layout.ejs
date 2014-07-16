@@ -16,7 +16,8 @@
       </div>
       <ul class="nav navbar-nav">
 	<% if(typeof(req.session.id ) == "undefined"){ %>
-	<li><a href="/user/login/">login</a></li>
+	<li><a href="/user/login/">login</a> </li>
+	<li><a href="/user/create/">or sign-up</a> </li>
 	<% }else{ %>
 	<li><a href="#">Hello <%=req.session.username%></a></li>
 	<% }%>

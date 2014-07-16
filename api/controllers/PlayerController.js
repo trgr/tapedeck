@@ -23,11 +23,15 @@ module.exports = {
     
     play : function(req,res){
 	var id = req.params.id
-	if(typeof(id) == "undefined")
-	    id="52cf08c437cc188c41882f21"
-	
-	Playlist.findOne(id).done(function(error,playlist){
-	    res.view("player/index",{playlist:playlist})
+	var search = { $regex : 'all'}
+	if(typeof(id) != "undefined")
+	    search = {_id :id}
+    
+	console.log(id)
+	Playlist.find(id).limit(1).done(function(error,playlist){
+	    if(!playlist)
+		return res.view("player/error",{message:"Playlist no findings"})
+	    return res.view("player/index",{playlist:playlist.pop()})
 	});
     },
     
