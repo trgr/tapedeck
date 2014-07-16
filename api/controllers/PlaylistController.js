@@ -172,7 +172,7 @@ module.exports = {
 	    items : items,
 	    user_id : user_id,
 	}).done(function(err,playlist){
-	    res.view("player/index",{playlistid:playlist.id})
+	    res.redirect("/play/"+playlist.id)
 	});
     }
 };

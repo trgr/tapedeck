@@ -7,8 +7,8 @@ $(function(){
     function load(id){
 	console.log(id);
 	player = new YT.Player('player', {
-	    height: '0',
-	    width: '0',
+	    height: '1',
+	    width: '1',
 	    videoId: id,
 	    events: {
 		'onReady': onPlayerReady,
